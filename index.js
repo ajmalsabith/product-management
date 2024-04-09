@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const app=express()
 
 app.use(cors({
-    origin:['http://localhost:4200']
+    origin:['https://product-manage-ment.netlify.app']
 }))
 
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: false }));
