@@ -95,6 +95,8 @@ const deleteProduct = async(req,res)=>{
 
 const productList=async (req,res)=>{
     try {
+
+        console.log('yes iam here');
         const productdata= await product.find()
         if(productdata){
             categoryBasedTotalvalue()
