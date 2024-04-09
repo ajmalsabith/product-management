@@ -97,6 +97,7 @@ const productList=async (req,res)=>{
     try {
         const productdata= await product.find()
         if(productdata){
+            categoryBasedTotalvalue()
             res.status(200).send({
                 productdata:productdata
             })
@@ -140,11 +141,52 @@ const findValueOfProducts=async (req,res)=>{
 }
 
 
+const categoryBasedTotalvalue= async(req,res)=>{
+    try {
+
+        const prodata= await product.find() 
+        const newkey = new Map()
+        prodata.forEach((product)=>{
+            if(newkey.has(product.category)){
+                newkey.get(product.category).push(product)
+            }else{
+                newkey.set(product.category,[product])
+            }
+        })
+
+        const newtotalarray=[]
+        newkey.forEach((product,category)=>{
+            const totalvalue= product.reduce((acc,prodata)=>{
+                return acc+(prodata.price*prodata.quantity)
+            },0)
+            newtotalarray.push({category,totalvalue})
+        })
+        console.log(newtotalarray);
+
+        if(newtotalarray){
+            res.status(200).send({
+                data:newtotalarray
+            })
+        }else{
+            res.status(400).send({
+                message:'something went wrong...!'
+            })
+        }
+        
+    } catch (error) {
+        console.log(error.message);
+    }
+
+
+}
+
+
 
 module.exports={
     addProduct,
     editProduct,
     deleteProduct,
     productList,
-    findValueOfProducts
+    findValueOfProducts,
+    categoryBasedTotalvalue
 }
