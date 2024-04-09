@@ -13,6 +13,10 @@ const newScheema= new mongoose.Schema({
         type:Number,
         required:true
     },
+    category:{
+        type:String,
+        required:true
+    },
     is_block:{
         type:Boolean,
         default:false

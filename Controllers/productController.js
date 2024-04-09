@@ -4,14 +4,15 @@ const product= require('../Models/productModel')
 const addProduct=async (req,res)=>{
     try {
 
-        const {name,price,quantity}=req.body.data
+        const {name,price,quantity,category}=req.body.data
 
-        if(name,price,quantity){
+        if(name,price,quantity,category){
 
             const newproduct= new product({
                 name:name,
                 price:price,
-                quantity:quantity
+                quantity:quantity,
+                category:category
             })
 
             const result= await newproduct.save()
@@ -39,10 +40,10 @@ const addProduct=async (req,res)=>{
 
 const editProduct= async (req,res)=>{
     try {
-        const {price,name,quantity,id}= req.body.data
-        if(price&&name&&quantity){
+        const {price,name,quantity,category,id}= req.body.data
+        if(price&&name&&quantity&&category){
        
-                const updatedata= await product.updateMany({_id:id},{$set:{name:name,price:price,quantity:quantity}})
+                const updatedata= await product.updateMany({_id:id},{$set:{name:name,price:price,quantity:quantity,category:category}})
                 if(updatedata){
                     res.status(200).send({
                         message:'product updated '
