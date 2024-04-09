@@ -4,6 +4,8 @@ const product= require('../Models/productModel')
 const addProduct=async (req,res)=>{
     try {
 
+        console.log('yes adding');
+
         const {name,price,quantity,category}=req.body.data
 
         if(name,price,quantity,category){
@@ -40,6 +42,8 @@ const addProduct=async (req,res)=>{
 
 const editProduct= async (req,res)=>{
     try {
+        console.log('yes editing');
+
         const {price,name,quantity,category,id}= req.body.data
         if(price&&name&&quantity&&category){
        
@@ -69,6 +73,8 @@ const editProduct= async (req,res)=>{
 
 const deleteProduct = async(req,res)=>{
     try {
+        console.log('yes deleting');
+
 
         const id= await req.params.id
 
